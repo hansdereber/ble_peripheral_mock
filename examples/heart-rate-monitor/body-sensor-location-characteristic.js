@@ -2,6 +2,7 @@ var util = require('util');
 
 var bleno = require('../..');
 
+var Descriptor = bleno.Descriptor;
 var Characteristic = bleno.Characteristic;
 
 var BodySensorLocationCharacteristic = function() {
