@@ -15,9 +15,21 @@ var IndoorBikeDataCharacteristic = function () {
                 value: 'This holds the training-related data of an indoor bike',
             })
         ],
+        value: null
     })
 
-    this
+    this._value = new Buffer(0);
+    this._updateValueCallback = null;
+
+    setTimeout(notify(), 1000)
+}
+
+function notify() {
+    if (this._updateValueCallback) {
+        console.log('EchoCharacteristic - onWriteRequest: notifying');
+        this._value = getRandomInt(100);
+        this._updateValueCallback(this._value);
+    }
 }
 
 util.inherits(IndoorBikeDataCharacteristic, Characteristic)
@@ -27,15 +39,22 @@ function getRandomInt(max) {
 }
 
 IndoorBikeDataCharacteristic.prototype.onReadRequest = function (offset, callback) {
-    setTimeout(function() {
-        if (self.updateValueCallback) {
-            var data = new Buffer(1);
-            data.writeUInt8(getRandomInt(2), 0);
-            self.updateValueCallback(data);
-        }
-    }, 1000);
+    console.log('EchoCharacteristic - onReadRequest: value = ' + this._value.toString('hex'));
 
-    callback(this.RESULT_SUCCESS)
+    callback(this.RESULT_SUCCESS, this._value);
 }
 
+IndoorBikeDataCharacteristic.prototype.onSubscribe = function(maxValueSize, updateValueCallback) {
+    console.log('EchoCharacteristic - onSubscribe');
+
+    this._updateValueCallback = updateValueCallback;
+};
+
+IndoorBikeDataCharacteristic.prototype.onUnsubscribe = function() {
+    console.log('EchoCharacteristic - onUnsubscribe');
+
+    this._updateValueCallback = null;
+};
+
 module.exports = IndoorBikeDataCharacteristic
+
