@@ -21,11 +21,7 @@ var IndoorBikeDataCharacteristic = function () {
     this._value = new Buffer(0)
     this._updateValueCallback = null
 
-    setInterval(     (function(self) {         //Self-executing func which takes 'this' as self
-        return function() {   //Return a function in the context of 'self'
-            self.notify(); //Thing you wanted to run as non-window 'this'
-        }
-    })(this), 1000)
+    setInterval(notify, 1000)
 }
 
 IndoorBikeDataCharacteristic.prototype.notify = function () {
@@ -46,7 +42,7 @@ function getRandomInt(max) {
 }
 
 IndoorBikeDataCharacteristic.prototype.onReadRequest = function (offset, callback) {
-    console.log('EchoCharacteristic - onReadRequest: value = ' + this._value.toString(16))
+    console.log('EchoCharacteristic - onReadRequest: value = ' + this._value.toString('hex'))
 
     callback(this.RESULT_SUCCESS, this._value)
 }
@@ -67,7 +63,19 @@ IndoorBikeDataCharacteristic.prototype.onWriteRequest = function(data, offset, w
 
 IndoorBikeDataCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
     console.log('EchoCharacteristic - onSubscribe')
+
     this._updateValueCallback = updateValueCallback
+
+    const sleep = (milliseconds) => {
+        return new Promise(resolve => setTimeout(resolve, milliseconds))
+    }
+
+    while (true) {
+        sleep(1000).then(() => {
+            this._updateValueCallback(parseInt(getRandomInt(100), 10))
+        })
+    }
+
 }
 
 IndoorBikeDataCharacteristic.prototype.onUnsubscribe = function () {
