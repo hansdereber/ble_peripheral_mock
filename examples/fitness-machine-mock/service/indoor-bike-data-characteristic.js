@@ -8,7 +8,7 @@ var Characteristic = bleno.Characteristic
 var IndoorBikeDataCharacteristic = function () {
     IndoorBikeDataCharacteristic.super_.call(this, {
         uuid: '13333333333333333333333333330002',
-        properties: ['notify', 'read'],
+        properties: ['notify', 'read', 'write'],
         descriptors: [
             new Descriptor({
                 uuid: '2901',
