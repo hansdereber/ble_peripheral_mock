@@ -25,6 +25,8 @@ var IndoorBikeDataCharacteristic = function () {
 }
 
 function notify() {
+    console.log("notify")
+
     if (this._updateValueCallback) {
         console.log('EchoCharacteristic - onWriteRequest: notifying');
         this._value = getRandomInt(100);
