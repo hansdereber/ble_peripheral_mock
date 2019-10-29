@@ -24,10 +24,6 @@ var DistanceCharacteristic = function () {
 
 util.inherits(DistanceCharacteristic, Characteristic)
 
-function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max))
-}
-
 DistanceCharacteristic.prototype.onReadRequest = function (offset, callback) {
     console.log('EchoCharacteristic - onReadRequest: value = ' + this._value.toString('hex'))
 
@@ -52,11 +48,12 @@ DistanceCharacteristic.prototype.onSubscribe = function (maxValueSize, updateVal
     console.log('EchoCharacteristic - onSubscribe')
 
     var self = this;
+    self._value = 17000
 
     this._updateValueCallback = updateValueCallback
 
     function notify() {
-        self._value = parseInt(getRandomInt(100), 10)
+        self._value = self._value + 82
 
         console.log(self._updateValueCallback)
         if (self._updateValueCallback) {
@@ -66,7 +63,7 @@ DistanceCharacteristic.prototype.onSubscribe = function (maxValueSize, updateVal
 
     }
 
-    setInterval(notify, 1000);
+    setInterval(notify, 15000);
 }
 
 DistanceCharacteristic.prototype.onUnsubscribe = function () {

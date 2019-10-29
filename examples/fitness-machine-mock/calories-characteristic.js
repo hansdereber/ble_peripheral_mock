@@ -52,11 +52,12 @@ CaloriesCharacteristic.prototype.onSubscribe = function (maxValueSize, updateVal
     console.log('EchoCharacteristic - onSubscribe')
 
     var self = this;
+    self._value = 64
 
     this._updateValueCallback = updateValueCallback
 
     function notify() {
-        self._value = parseInt(getRandomInt(100), 10)
+        self._value = self._value + getRandomInt(2)
 
         console.log(self._updateValueCallback)
         if (self._updateValueCallback) {
@@ -66,7 +67,7 @@ CaloriesCharacteristic.prototype.onSubscribe = function (maxValueSize, updateVal
 
     }
 
-    setInterval(notify, 1000);
+    setInterval(notify, 10010);
 }
 
 CaloriesCharacteristic.prototype.onUnsubscribe = function () {

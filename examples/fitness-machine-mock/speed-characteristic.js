@@ -24,8 +24,10 @@ var SpeedCharacteristic = function () {
 
 util.inherits(SpeedCharacteristic, Characteristic)
 
-function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max))
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 SpeedCharacteristic.prototype.onReadRequest = function (offset, callback) {
@@ -56,7 +58,7 @@ SpeedCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueC
     this._updateValueCallback = updateValueCallback
 
     function notify() {
-        self._value = parseInt(getRandomInt(100), 10)
+        self._value = getRandomInt(32, 35)
 
         console.log(self._updateValueCallback)
         if (self._updateValueCallback) {
@@ -66,7 +68,7 @@ SpeedCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueC
 
     }
 
-    setInterval(notify, 1000);
+    setInterval(notify, 500);
 }
 
 SpeedCharacteristic.prototype.onUnsubscribe = function () {

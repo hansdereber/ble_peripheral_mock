@@ -24,10 +24,6 @@ var TimeCharacteristic = function () {
 
 util.inherits(TimeCharacteristic, Characteristic)
 
-function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max))
-}
-
 TimeCharacteristic.prototype.onReadRequest = function (offset, callback) {
     console.log('EchoCharacteristic - onReadRequest: value = ' + this._value.toString('hex'))
 
@@ -55,8 +51,10 @@ TimeCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCa
 
     this._updateValueCallback = updateValueCallback
 
+    self._value = 2520
+
     function notify() {
-        self._value = parseInt(getRandomInt(100), 10)
+        self._value = self._value + 1
 
         console.log(self._updateValueCallback)
         if (self._updateValueCallback) {

@@ -24,8 +24,10 @@ var WattageCharacteristic = function () {
 
 util.inherits(WattageCharacteristic, Characteristic)
 
-function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max))
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 WattageCharacteristic.prototype.onReadRequest = function (offset, callback) {
@@ -56,7 +58,7 @@ WattageCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValu
     this._updateValueCallback = updateValueCallback
 
     function notify() {
-        self._value = parseInt(getRandomInt(100), 10)
+        self._value = getRandomInt(100, 120)
 
         console.log(self._updateValueCallback)
         if (self._updateValueCallback) {
