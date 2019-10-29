@@ -63,16 +63,21 @@ IndoorBikeDataCharacteristic.prototype.onSubscribe = function (maxValueSize, upd
     console.log('EchoCharacteristic - onSubscribe')
 
     this._updateValueCallback = updateValueCallback
+    var that = this
 
-    const sleep = (milliseconds) => {
-        return new Promise(resolve => setTimeout(resolve, milliseconds))
+    function notify() {
+        console.log("notify")
+
+        that._value = parseInt(getRandomInt(100), 10)
+
+        if (that._updateValueCallback) {
+            console.log('EchoCharacteristic - onWriteRequest: notifying')
+            that._updateValueCallback(this._value)
+        }
     }
 
-    while (true) {
-        sleep(1000).then(() => {
-            this._updateValueCallback(parseInt(getRandomInt(100), 10))
-        })
-    }
+    var self = this;
+    setInterval(function() { self.notify() }, 1000);
 
 }
 
