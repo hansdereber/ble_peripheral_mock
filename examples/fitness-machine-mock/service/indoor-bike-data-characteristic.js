@@ -21,11 +21,13 @@ var IndoorBikeDataCharacteristic = function () {
     this._value = new Buffer(0)
     this._updateValueCallback = null
 
+    setInterval(this.notify, 1000)
 }
 
 IndoorBikeDataCharacteristic.prototype.notify = function () {
     console.log("notify")
-    this._value = getRandomInt(1)
+
+    this._value = parseInt(getRandomInt(100), 10)
 
     if (this._updateValueCallback) {
         console.log('EchoCharacteristic - onWriteRequest: notifying')
@@ -63,14 +65,6 @@ IndoorBikeDataCharacteristic.prototype.onSubscribe = function (maxValueSize, upd
     console.log('EchoCharacteristic - onSubscribe')
 
     this._updateValueCallback = updateValueCallback
-
-    if (this._updateValueCallback) {
-        console.log('EchoCharacteristic - onWriteRequest: notifying');
-
-        value = parseInt(42, 10);
-
-        this._updateValueCallback([value])
-    }
 }
 
 IndoorBikeDataCharacteristic.prototype.onUnsubscribe = function () {
