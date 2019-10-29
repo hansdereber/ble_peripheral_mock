@@ -57,13 +57,17 @@ SpeedCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueC
 
     this._updateValueCallback = updateValueCallback
 
+    function toKmh(val) {
+        return val / 10
+    }
+
     function notify() {
-        self._value = getRandomInt(32, 35)
+        self._value = getRandomInt(320, 350)
 
         console.log(self._updateValueCallback)
         if (self._updateValueCallback) {
-            console.log('EchoCharacteristic - onWriteRequest: notifying')
-            self._updateValueCallback([self._value])
+            console.log('EchoCharacteristic - onWriteRequest: notifying ' + toKmh(self._value))
+            self._updateValueCallback(new Buffer(toKmh(self._value)))
         }
 
     }
