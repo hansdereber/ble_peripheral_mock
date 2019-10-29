@@ -21,17 +21,18 @@ var IndoorBikeDataCharacteristic = function () {
     this._value = new Buffer(0)
     this._updateValueCallback = null
 
-    setInterval(notify, 1000);
-}
+    setInterval(notify(this), 1000);
 
-function notify() {
-    console.log("notify")
+    function notify(that) {
+        console.log("notify")
 
-    if (this._updateValueCallback) {
-        console.log('EchoCharacteristic - onWriteRequest: notifying')
-        this._value = getRandomInt(10)
-        this._updateValueCallback(this._value)
+        if (that._updateValueCallback) {
+            console.log('EchoCharacteristic - onWriteRequest: notifying')
+            that._value = getRandomInt(10)
+            that._updateValueCallback(that._value)
+        }
     }
+
 }
 
 util.inherits(IndoorBikeDataCharacteristic, Characteristic)
