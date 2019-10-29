@@ -21,7 +21,7 @@ var IndoorBikeDataCharacteristic = function () {
     this._value = new Buffer(0);
     this._updateValueCallback = null;
 
-    setTimeout(notify(), 1000)
+    setTimeout(this.notify, 1000)
 }
 
 function notify() {
