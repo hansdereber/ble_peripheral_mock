@@ -62,7 +62,7 @@ TimeCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCa
             return sec < 10 ? min + ':0' + sec : min + ':' + sec
         }
 
-        self._value += 1
+        self._value += 5
 
         console.log(self._updateValueCallback)
         if (self._updateValueCallback) {
@@ -72,7 +72,7 @@ TimeCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCa
 
     }
 
-    setInterval(notify, 1000);
+    setInterval(notify, 5000);
 }
 
 TimeCharacteristic.prototype.onUnsubscribe = function () {
