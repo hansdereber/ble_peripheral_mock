@@ -58,7 +58,7 @@ BpmCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCal
     this._updateValueCallback = updateValueCallback
 
     function notify() {
-        self._value = parseInt(getRandomInt(89, 100), 10)
+        self._value = getRandomInt(89, 100)
 
         console.log(self._updateValueCallback)
         if (self._updateValueCallback) {
