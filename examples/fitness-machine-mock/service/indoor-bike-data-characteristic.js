@@ -62,9 +62,8 @@ IndoorBikeDataCharacteristic.prototype.onWriteRequest = function(data, offset, w
 IndoorBikeDataCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
     console.log('EchoCharacteristic - onSubscribe')
 
-    setInterval(this.notify, 1000);
-
     this._updateValueCallback = updateValueCallback
+    setInterval(this.notify, 1000);
 }
 
 IndoorBikeDataCharacteristic.prototype.onUnsubscribe = function () {
