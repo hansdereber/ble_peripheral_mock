@@ -20,8 +20,6 @@ var IndoorBikeDataCharacteristic = function () {
 
     this._value = new Buffer(0)
     this._updateValueCallback = null
-
-    setInterval(notify, 1000)
 }
 
 IndoorBikeDataCharacteristic.prototype.notify = function () {
