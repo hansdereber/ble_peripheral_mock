@@ -59,7 +59,7 @@ TimeCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCa
             var sec = totSec % 60
             var min = parseInt(totSec / 60)
 
-            return sec < 10 ? min + ':0' + sec : min + ':0' + sec
+            return sec < 10 ? min + ':0' + sec : min + ':' + sec
         }
 
         self._value += 1

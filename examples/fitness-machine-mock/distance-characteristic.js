@@ -15,7 +15,7 @@ var DistanceCharacteristic = function () {
                 value: 'distance',
             })
         ],
-        value: null
+        value: new Buffer((17.0).toString())
     })
 
     this._value = new Buffer((17.0).toString())
@@ -57,8 +57,8 @@ DistanceCharacteristic.prototype.onSubscribe = function (maxValueSize, updateVal
 
         console.log(self._updateValueCallback)
         if (self._updateValueCallback) {
-            console.log('EchoCharacteristic - onWriteRequest: notifying ' + self._value.toString())
-            self._updateValueCallback(new Buffer(self._value.toString()))
+            console.log('EchoCharacteristic - onWriteRequest: notifying ' + self._value.toFixed(1).toString())
+            self._updateValueCallback(new Buffer(self._value.toFixed(1).toString()))
         }
 
     }
