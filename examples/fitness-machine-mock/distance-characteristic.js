@@ -18,7 +18,7 @@ var DistanceCharacteristic = function () {
         value: null
     })
 
-    this._value = new Buffer(0)
+    this._value = new Buffer((17.0).toString())
     this._updateValueCallback = null
 }
 
