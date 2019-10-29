@@ -21,7 +21,7 @@ var IndoorBikeDataCharacteristic = function () {
     this._value = new Buffer(0);
     this._updateValueCallback = null;
 
-    setTimeout(function(){ alert("Hello"); }, 1000);
+    setTimeout(function(){ System.log("Hello"); }, 1000);
 }
 
 function notify() {
