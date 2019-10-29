@@ -52,9 +52,10 @@ IndoorBikeDataCharacteristic.prototype.onSubscribe = function (maxValueSize, upd
     console.log('EchoCharacteristic - onSubscribe')
 
     var self = this;
+    console.log(this)
 
     function notify() {
-        console.log("notify")
+        console.log(self)
 
 //        that._value = parseInt(getRandomInt(100), 10)
 
