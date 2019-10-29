@@ -51,7 +51,6 @@ IndoorBikeDataCharacteristic.prototype.onWriteRequest = function(data, offset, w
 IndoorBikeDataCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
     console.log('EchoCharacteristic - onSubscribe')
 
-    this._updateValueCallback = updateValueCallback
     var self = this;
 
     function notify() {
@@ -59,13 +58,18 @@ IndoorBikeDataCharacteristic.prototype.onSubscribe = function (maxValueSize, upd
 
 //        that._value = parseInt(getRandomInt(100), 10)
 
+/*
         if (self._updateValueCallback) {
             console.log('EchoCharacteristic - onWriteRequest: notifying')
             self._updateValueCallback()
         }
+*/
     }
 
-    setInterval(() => { self.notify() }, 1000);
+    setInterval(notify, 1000);
+
+
+    this._updateValueCallback = updateValueCallback
 }
 
 IndoorBikeDataCharacteristic.prototype.onUnsubscribe = function () {
