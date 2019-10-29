@@ -44,15 +44,11 @@ function getRandomInt(max) {
 }
 
 IndoorBikeDataCharacteristic.prototype.onReadRequest = function (offset, callback) {
-    console.log('EchoCharacteristic - onReadRequest: value = ' + _value.toString('hex'))
-
     callback(this.RESULT_SUCCESS, _value)
 }
 
 IndoorBikeDataCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResponse, callback) {
     _value = data;
-
-    console.log('EchoCharacteristic - onWriteRequest: value = ' + _value.toString('hex'));
 
     if (_updateValueCallback) {
         console.log('EchoCharacteristic - onWriteRequest: notifying');
