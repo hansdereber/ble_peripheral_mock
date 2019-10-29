@@ -58,7 +58,7 @@ SpeedCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueC
     this._updateValueCallback = updateValueCallback
 
     function toKmh(val) {
-        return val / 10
+        return (val / 10).toString()
     }
 
     function notify() {
