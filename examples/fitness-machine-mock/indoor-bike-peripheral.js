@@ -1,13 +1,13 @@
 var bleno = require('../..');
-var HrsService = require('./hrs-service');
+var FtmsService = require('./ftms-service');
 
-var primaryService = new HrsService();
+var primaryService = new FtmsService();
 
 bleno.on('stateChange', function(state) {
   console.log('on -> stateChange: ' + state);
 
   if (state === 'poweredOn') {
-    bleno.startAdvertising('Sample HRM', [primaryService.uuid]);
+    bleno.startAdvertising('Sample FTM', [primaryService.uuid]);
   } else {
     bleno.stopAdvertising();
   }
