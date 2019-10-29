@@ -18,7 +18,7 @@ var IndoorBikeDataCharacteristic = function () {
         value: null
     })
 
-    this._value = null //new Buffer(0)
+    this._value = new Buffer(0)
     this._updateValueCallback = null
 
 }
