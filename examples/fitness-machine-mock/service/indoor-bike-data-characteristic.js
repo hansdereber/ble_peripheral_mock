@@ -18,7 +18,7 @@ var IndoorBikeDataCharacteristic = function () {
         value: null
     })
 
-    this._value = new Buffer(0)
+    this._value = null //new Buffer(0)
     this._updateValueCallback = null
 
 }
@@ -67,7 +67,9 @@ IndoorBikeDataCharacteristic.prototype.onSubscribe = function (maxValueSize, upd
     if (this._updateValueCallback) {
         console.log('EchoCharacteristic - onWriteRequest: notifying');
 
-        this._updateValueCallback(1)
+        value = parseInt(42, 10);
+
+        this._updateValueCallback([value])
     }
 }
 
