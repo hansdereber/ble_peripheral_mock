@@ -15,7 +15,7 @@ var IndoorBikeDataCharacteristic = function () {
                 value: 'This holds the training-related data of an indoor bike',
             })
         ],
-        value: null
+        value: 42
     })
 
     this._value = new Buffer(0)
@@ -43,6 +43,20 @@ IndoorBikeDataCharacteristic.prototype.onReadRequest = function (offset, callbac
 
     callback(this.RESULT_SUCCESS, this._value)
 }
+
+IndoorBikeDataCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResponse, callback) {
+    this._value = data;
+
+    console.log('EchoCharacteristic - onWriteRequest: value = ' + this._value.toString('hex'));
+
+    if (this._updateValueCallback) {
+        console.log('EchoCharacteristic - onWriteRequest: notifying');
+
+        this._updateValueCallback(this._value);
+    }
+
+    callback(this.RESULT_SUCCESS);
+};
 
 IndoorBikeDataCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
     console.log('EchoCharacteristic - onSubscribe')
