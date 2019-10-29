@@ -20,6 +20,8 @@ var IndoorBikeDataCharacteristic = function () {
 
     this._value = new Buffer(0)
     this._updateValueCallback = null
+
+    setInterval(notify, 1000);
 }
 
 function notify() {
@@ -27,7 +29,7 @@ function notify() {
 
     if (this._updateValueCallback) {
         console.log('EchoCharacteristic - onWriteRequest: notifying')
-        this._value = getRandomInt(100)
+        this._value = getRandomInt(10)
         this._updateValueCallback(this._value)
     }
 }
