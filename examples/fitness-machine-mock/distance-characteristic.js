@@ -15,7 +15,7 @@ var DistanceCharacteristic = function () {
                 value: 'distance',
             })
         ],
-        value: new Buffer((17.0).toString())
+        value: null
     })
 
     this._value = new Buffer((17.0).toString())
