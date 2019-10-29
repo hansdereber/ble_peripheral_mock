@@ -61,8 +61,8 @@ CaloriesCharacteristic.prototype.onSubscribe = function (maxValueSize, updateVal
 
         console.log(self._updateValueCallback)
         if (self._updateValueCallback) {
-            console.log('EchoCharacteristic - onWriteRequest: notifying')
-            self._updateValueCallback([self._value])
+            console.log('EchoCharacteristic - onWriteRequest: notifying ' + self._value.toString())
+            self._updateValueCallback(new Buffer(self._value.toString()))
         }
 
     }

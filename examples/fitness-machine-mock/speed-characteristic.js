@@ -72,7 +72,7 @@ SpeedCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueC
 
     }
 
-    setInterval(notify, 500);
+    setInterval(notify, 2080);
 }
 
 SpeedCharacteristic.prototype.onUnsubscribe = function () {

@@ -62,13 +62,13 @@ BpmCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCal
 
         console.log(self._updateValueCallback)
         if (self._updateValueCallback) {
-            console.log('EchoCharacteristic - onWriteRequest: notifying')
-            self._updateValueCallback([self._value])
+            console.log('EchoCharacteristic - onWriteRequest: notifying ' + self._value.toString())
+            self._updateValueCallback(new Buffer(self._value.toString()))
         }
 
     }
 
-    setInterval(notify, 2000);
+    setInterval(notify, 2030);
 }
 
 BpmCharacteristic.prototype.onUnsubscribe = function () {

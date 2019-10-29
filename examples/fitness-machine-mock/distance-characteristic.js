@@ -48,22 +48,22 @@ DistanceCharacteristic.prototype.onSubscribe = function (maxValueSize, updateVal
     console.log('EchoCharacteristic - onSubscribe')
 
     var self = this;
-    self._value = 17000
+    self._value = 17.0
 
     this._updateValueCallback = updateValueCallback
 
     function notify() {
-        self._value = self._value + 82
+        self._value = self._value + 0.1
 
         console.log(self._updateValueCallback)
         if (self._updateValueCallback) {
-            console.log('EchoCharacteristic - onWriteRequest: notifying')
-            self._updateValueCallback([self._value])
+            console.log('EchoCharacteristic - onWriteRequest: notifying ' + self._value.toString())
+            self._updateValueCallback(new Buffer(self._value.toString()))
         }
 
     }
 
-    setInterval(notify, 15000);
+    setInterval(notify, 15050);
 }
 
 DistanceCharacteristic.prototype.onUnsubscribe = function () {

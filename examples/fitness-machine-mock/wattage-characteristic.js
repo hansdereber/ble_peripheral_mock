@@ -58,12 +58,12 @@ WattageCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValu
     this._updateValueCallback = updateValueCallback
 
     function notify() {
-        self._value = getRandomInt(100, 120)
+        self._value = getRandomInt(100, 120).toString()
 
         console.log(self._updateValueCallback)
         if (self._updateValueCallback) {
-            console.log('EchoCharacteristic - onWriteRequest: notifying')
-            self._updateValueCallback([self._value])
+            console.log('EchoCharacteristic - onWriteRequest: notifying ' + self._value)
+            self._updateValueCallback(new Buffer(self._value))
         }
 
     }
@@ -78,4 +78,3 @@ WattageCharacteristic.prototype.onUnsubscribe = function () {
 }
 
 module.exports = WattageCharacteristic
-
