@@ -5,14 +5,14 @@ var bleno = require('../../..')
 var Descriptor = bleno.Descriptor
 var Characteristic = bleno.Characteristic
 
-var IndoorBikeDataCharacteristic = function () {
-    IndoorBikeDataCharacteristic.super_.call(this, {
-        uuid: '13333333333333333333333333330002',
-        properties: ['notify', 'read', 'write'],
+var SpeedCharacteristic = function () {
+    SpeedCharacteristic.super_.call(this, {
+        uuid: '13333333333333333333333333330001',
+        properties: ['notify', 'read'],
         descriptors: [
             new Descriptor({
                 uuid: '2901',
-                value: 'This holds the training-related data of an indoor bike',
+                value: 'speed',
             })
         ],
         value: null
@@ -22,19 +22,19 @@ var IndoorBikeDataCharacteristic = function () {
     this._updateValueCallback = null
 }
 
-util.inherits(IndoorBikeDataCharacteristic, Characteristic)
+util.inherits(SpeedCharacteristic, Characteristic)
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max))
 }
 
-IndoorBikeDataCharacteristic.prototype.onReadRequest = function (offset, callback) {
+SpeedCharacteristic.prototype.onReadRequest = function (offset, callback) {
     console.log('EchoCharacteristic - onReadRequest: value = ' + this._value.toString('hex'))
 
     callback(this.RESULT_SUCCESS, this._value)
 }
 
-IndoorBikeDataCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResponse, callback) {
+SpeedCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResponse, callback) {
     this._value = data;
 
     console.log('EchoCharacteristic - onWriteRequest: value = ' + this._value.toString('hex'));
@@ -48,7 +48,7 @@ IndoorBikeDataCharacteristic.prototype.onWriteRequest = function(data, offset, w
     callback(this.RESULT_SUCCESS);
 };
 
-IndoorBikeDataCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
+SpeedCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
     console.log('EchoCharacteristic - onSubscribe')
 
     var self = this;
@@ -67,15 +67,13 @@ IndoorBikeDataCharacteristic.prototype.onSubscribe = function (maxValueSize, upd
     }
 
     setInterval(notify, 1000);
-
-
 }
 
-IndoorBikeDataCharacteristic.prototype.onUnsubscribe = function () {
+SpeedCharacteristic.prototype.onUnsubscribe = function () {
     console.log('EchoCharacteristic - onUnsubscribe')
 
     this._updateValueCallback = null
 }
 
-module.exports = IndoorBikeDataCharacteristic
+module.exports = SpeedCharacteristic
 
