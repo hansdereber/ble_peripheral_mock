@@ -54,12 +54,20 @@ TimeCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCa
     self._value = 2520
 
     function notify() {
-        self._value = self._value + 1
+
+        function toMinutes(totSec) {
+            sec = totSec % 60
+            min = parseInt(totSec / 60)
+
+            return toString(min) + ':' + toString(sec)
+        }
+
+        self._value += 1
 
         console.log(self._updateValueCallback)
         if (self._updateValueCallback) {
-            console.log('EchoCharacteristic - onWriteRequest: notifying')
-            self._updateValueCallback([self._value])
+            console.log('EchoCharacteristic - onWriteRequest: notifying ' + toMinutes(self._value))
+            self._updateValueCallback(new Buffer(toMinutes(self._value)))
         }
 
     }
