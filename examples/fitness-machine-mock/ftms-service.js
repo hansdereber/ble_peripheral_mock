@@ -4,15 +4,23 @@ var bleno = require('../..');
 
 var BlenoPrimaryService = bleno.PrimaryService;
 
-var FitnessMachineFeatureCharacteristic = require('./service/fitness-machine-feature-characteristic');
-var IndoorBikeDataCharacteristic = require('./service/indoor-bike-data-characteristic');
+var BpmCharacteristic = require('./bpm-characteristic');
+var CaloriesCharacteristic = require('./calories-characteristic');
+var DistanceCharacteristic = require('./distance-characteristic');
+var SpeedCharacteristic = require('./speed-characteristic');
+var TimeCharacteristic = require('./time-characteristic');
+var WattageCharacteristic = require('./wattage-characteristic');
 
 function FtmsService() {
   FtmsService.super_.call(this, {
       uuid: '13333333333333333333333333333337',
       characteristics: [
-          new FitnessMachineFeatureCharacteristic(),
-          new IndoorBikeDataCharacteristic(),
+          new BpmCharacteristic(),
+          new CaloriesCharacteristic(),
+          new DistanceCharacteristic(),
+          new SpeedCharacteristic(),
+          new TimeCharacteristic(),
+          new WattageCharacteristic(),
       ]
   });
 }

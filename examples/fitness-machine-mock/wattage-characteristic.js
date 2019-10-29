@@ -1,12 +1,12 @@
 var util = require('util')
 
-var bleno = require('../../..')
+var bleno = require('../..')
 
 var Descriptor = bleno.Descriptor
 var Characteristic = bleno.Characteristic
 
-var SpeedCharacteristic = function () {
-    SpeedCharacteristic.super_.call(this, {
+var WattageCharacteristic = function () {
+    WattageCharacteristic.super_.call(this, {
         uuid: '13333333333333333333333333330003',
         properties: ['notify', 'read'],
         descriptors: [
@@ -22,19 +22,19 @@ var SpeedCharacteristic = function () {
     this._updateValueCallback = null
 }
 
-util.inherits(SpeedCharacteristic, Characteristic)
+util.inherits(WattageCharacteristic, Characteristic)
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max))
 }
 
-SpeedCharacteristic.prototype.onReadRequest = function (offset, callback) {
+WattageCharacteristic.prototype.onReadRequest = function (offset, callback) {
     console.log('EchoCharacteristic - onReadRequest: value = ' + this._value.toString('hex'))
 
     callback(this.RESULT_SUCCESS, this._value)
 }
 
-SpeedCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResponse, callback) {
+WattageCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResponse, callback) {
     this._value = data;
 
     console.log('EchoCharacteristic - onWriteRequest: value = ' + this._value.toString('hex'));
@@ -48,7 +48,7 @@ SpeedCharacteristic.prototype.onWriteRequest = function(data, offset, withoutRes
     callback(this.RESULT_SUCCESS);
 };
 
-SpeedCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
+WattageCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
     console.log('EchoCharacteristic - onSubscribe')
 
     var self = this;
@@ -69,11 +69,11 @@ SpeedCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueC
     setInterval(notify, 1000);
 }
 
-SpeedCharacteristic.prototype.onUnsubscribe = function () {
+WattageCharacteristic.prototype.onUnsubscribe = function () {
     console.log('EchoCharacteristic - onUnsubscribe')
 
     this._updateValueCallback = null
 }
 
-module.exports = SpeedCharacteristic
+module.exports = WattageCharacteristic
 

@@ -1,12 +1,12 @@
 var util = require('util')
 
-var bleno = require('../../..')
+var bleno = require('../..')
 
 var Descriptor = bleno.Descriptor
 var Characteristic = bleno.Characteristic
 
-var SpeedCharacteristic = function () {
-    SpeedCharacteristic.super_.call(this, {
+var BpmCharacteristic = function () {
+    BpmCharacteristic.super_.call(this, {
         uuid: '13333333333333333333333333330002',
         properties: ['notify', 'read'],
         descriptors: [
@@ -22,7 +22,7 @@ var SpeedCharacteristic = function () {
     this._updateValueCallback = null
 }
 
-util.inherits(SpeedCharacteristic, Characteristic)
+util.inherits(BpmCharacteristic, Characteristic)
 
 function getRandomInt(min, max) {
     min = Math.ceil(min);
@@ -30,13 +30,13 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-SpeedCharacteristic.prototype.onReadRequest = function (offset, callback) {
+BpmCharacteristic.prototype.onReadRequest = function (offset, callback) {
     console.log('EchoCharacteristic - onReadRequest: value = ' + this._value.toString('hex'))
 
     callback(this.RESULT_SUCCESS, this._value)
 }
 
-SpeedCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResponse, callback) {
+BpmCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResponse, callback) {
     this._value = data;
 
     console.log('EchoCharacteristic - onWriteRequest: value = ' + this._value.toString('hex'));
@@ -50,7 +50,7 @@ SpeedCharacteristic.prototype.onWriteRequest = function(data, offset, withoutRes
     callback(this.RESULT_SUCCESS);
 };
 
-SpeedCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
+BpmCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
     console.log('EchoCharacteristic - onSubscribe')
 
     var self = this;
@@ -71,11 +71,11 @@ SpeedCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueC
     setInterval(notify, 2000);
 }
 
-SpeedCharacteristic.prototype.onUnsubscribe = function () {
+BpmCharacteristic.prototype.onUnsubscribe = function () {
     console.log('EchoCharacteristic - onUnsubscribe')
 
     this._updateValueCallback = null
 }
 
-module.exports = SpeedCharacteristic
+module.exports = BpmCharacteristic
 
