@@ -15,7 +15,7 @@ var IndoorBikeDataCharacteristic = function () {
                 value: 'This holds the training-related data of an indoor bike',
             })
         ],
-        value: 42
+        value: null
     })
 
     this._value = new Buffer(0)
