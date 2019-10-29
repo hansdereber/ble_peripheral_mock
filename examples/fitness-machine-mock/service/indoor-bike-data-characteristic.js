@@ -56,12 +56,12 @@ IndoorBikeDataCharacteristic.prototype.onSubscribe = function (maxValueSize, upd
     this._updateValueCallback = updateValueCallback
 
     function notify() {
-//        that._value = parseInt(getRandomInt(100), 10)
+        self._value = parseInt(getRandomInt(100), 10)
 
         console.log(self._updateValueCallback)
         if (self._updateValueCallback) {
             console.log('EchoCharacteristic - onWriteRequest: notifying')
-//            self._updateValueCallback()
+            self._updateValueCallback([self._value])
         }
 
     }
