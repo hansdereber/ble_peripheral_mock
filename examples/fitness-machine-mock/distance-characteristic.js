@@ -53,7 +53,7 @@ DistanceCharacteristic.prototype.onSubscribe = function (maxValueSize, updateVal
     this._updateValueCallback = updateValueCallback
 
     function notify() {
-        self._value = self._value + 0.1
+        self._value = self._value + 0.01
 
         console.log(self._updateValueCallback)
         if (self._updateValueCallback) {
@@ -63,7 +63,7 @@ DistanceCharacteristic.prototype.onSubscribe = function (maxValueSize, updateVal
 
     }
 
-    setInterval(notify, 15050);
+    setInterval(notify, 1505);
 }
 
 DistanceCharacteristic.prototype.onUnsubscribe = function () {
